@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SE4095 Assignment 03 Report - M. Waqas Chohan (23F-3041)</title>
+<style>
+  @page { size: A4; margin: 15mm 15mm 16mm 15mm; }
+  :root {
+    --navy: #14325C; --teal: #0E7C86; --red: #B23A48; --gold: #D89B2B;
+    --ink: #1F2933; --muted: #5B6B7B; --rule: #D5DEE8; --tint: #F2F6FA; --tint2: #E8F4F5;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: "Source Serif 4", "Georgia", serif; color: var(--ink); font-size: 9.6pt;
+         line-height: 1.38; margin: 0; background: #fff; }
+  h1, h2, h3, .sans, table, figcaption, .meta, .callout-title { font-family: "Inter", "Helvetica Neue", Arial, sans-serif; }
+
+  /* Title block */
+  .titlebar { background: linear-gradient(120deg, var(--navy) 0%, #1D4E89 55%, var(--teal) 100%);
+              color: #fff; padding: 13px 18px 12px; border-radius: 6px; margin-bottom: 8px; }
+  .titlebar .course { font-size: 8.4pt; letter-spacing: .08em; text-transform: uppercase; opacity: .85; }
+  .titlebar h1 { font-size: 17pt; margin: 3px 0 4px; line-height: 1.15; font-weight: 700; }
+  .titlebar .sub { font-size: 10pt; opacity: .95; }
+  .meta { display: flex; gap: 0; font-size: 8.4pt; border: 1px solid var(--rule); border-radius: 5px;
+          margin-bottom: 9px; overflow: hidden; }
+  .meta div { flex: 1; padding: 5px 9px; border-right: 1px solid var(--rule); background: var(--tint); }
+  .meta div:last-child { border-right: none; }
+  .meta b { display: block; color: var(--muted); font-weight: 600; font-size: 7.4pt;
+            text-transform: uppercase; letter-spacing: .05em; }
+
+  h2 { color: var(--navy); font-size: 12.2pt; margin: 11px 0 4px; padding-bottom: 2px;
+       border-bottom: 2px solid var(--teal); break-after: avoid; }
+  h2 .num { color: var(--teal); margin-right: 6px; }
+  h3 { color: var(--teal); font-size: 10pt; margin: 7px 0 2px; break-after: avoid; }
+  p { margin: 3px 0 5px; text-align: justify; hyphens: auto; }
+  ul, ol { margin: 2px 0 5px 0; padding-left: 17px; }
+  li { margin: 1px 0; }
+  code, .mono { font-family: "JetBrains Mono", "Consolas", monospace; font-size: 8.4pt;
+                background: var(--tint); padding: 0 3px; border-radius: 3px; }
+
+  table { border-collapse: collapse; width: 100%; font-size: 8pt; margin: 4px 0 6px; break-inside: avoid; }
+  th { background: var(--navy); color: #fff; font-weight: 600; padding: 3px 5px; text-align: left; }
+  td { padding: 2.4px 5px; border-bottom: 1px solid var(--rule); }
+  tr:nth-child(even) td { background: var(--tint); }
+  td.r, th.r { text-align: right; }
+  tr.best td { background: #FFF4DE !important; font-weight: 600; }
+  .tcap { font-family: "Inter", Arial, sans-serif; font-size: 7.8pt; color: var(--muted); margin: -2px 0 6px; }
+
+  figure { margin: 5px 0 7px; text-align: center; break-inside: avoid; }
+  figure img { max-width: 100%; border: 1px solid var(--rule); border-radius: 4px; }
+  figcaption { font-size: 7.8pt; color: var(--muted); margin-top: 2px; text-align: left; }
+  figcaption b { color: var(--navy); }
+
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: start; }
+  .two-6040 { display: grid; grid-template-columns: 1.15fr 1fr; gap: 12px; align-items: start; }
+  .callout { background: var(--tint2); border-left: 4px solid var(--teal); padding: 5px 9px;
+             margin: 5px 0 7px; border-radius: 0 4px 4px 0; break-inside: avoid; }
+  .callout.warn { background: #FBF0F1; border-left-color: var(--red); }
+  .callout.gold { background: #FDF6E8; border-left-color: var(--gold); }
+  .callout-title { font-weight: 700; font-size: 8.4pt; color: var(--navy); text-transform: uppercase;
+                   letter-spacing: .04em; margin-bottom: 1px; }
+  .eq { text-align: center; font-size: 10.5pt; margin: 4px 0 5px; font-family: "Cambria Math", "STIX Two Math", serif; }
+  .pass { color: #1E7B3E; font-weight: 700; }
+  .refs p { text-align: left; font-size: 8.4pt; margin: 2px 0 3px; padding-left: 14px; text-indent: -14px; }
+  .pagebreak { break-before: page; }
+  .small { font-size: 8.4pt; }
+</style>
+</head>
+<body>
+
+<div class="titlebar">
+  <div class="course">SE4095 Social Network Theory and Practice &middot; Assignment 03</div>
+  <h1>Learning to Seed an Awareness Message with REINFORCE</h1>
+  <div class="sub">Budgeted influence maximization on the SocioPatterns workplace contact network
+    with an MLP and a Transformer policy</div>
+</div>
+<div class="meta">
+  <div><b>Student</b>M. Waqas Chohan</div>
+  <div><b>Roll number</b>23F-3041</div>
+  <div><b>Code</b>github.com/Waqas-Chohan/reinforcement-learning</div>
+  <div><b>Reproduce</b><span class="mono">python main.py --output results</span></div>
+</div>
+
+<div class="callout">
+  <div class="callout-title">Summary</div>
+  An organization may promote a message to only five of 92 employees. I implemented the Independent
+  Cascade simulator, a sequential selection environment and REINFORCE from scratch, and trained a
+  shared-weight MLP policy and a Transformer policy (three seeds each, 1,000 episodes per run). On the
+  same 100 held-out diffusion realizations, Random reached a mean spread of <b>60.24</b>, Degree
+  <b>59.67</b>, the MLP <b>57.53&nbsp;&plusmn;&nbsp;1.39</b> and the Transformer
+  <b>58.86&nbsp;&plusmn;&nbsp;0.65</b> (mean &plusmn; population std over seeds). All 17 verification
+  checks pass. The learned policies stayed close to uniform after 50 updates, so their greedy choices
+  mostly reflect initialization. The main lesson concerns this graph: at p&nbsp;=&nbsp;0.10 it is
+  supercritical, and five seeds almost always trigger the same large cascade.
+</div>
+
+<h2><span class="num">1</span>Dataset and Network Analysis</h2>
+<p>The instructor-supplied static package derived from <i>SocioPatterns Contacts in a Workplace</i>
+(office building in France, 24 June&ndash;3 July 2013) was used unchanged; the SHA-256 hashes of all
+three CSV files match the dataset README. All 92 participants are loaded from <span class="mono">nodes.csv</span>
+before the 755 edges are added. The graph is undirected and unweighted, has no self-loops or duplicate
+pairs, and aggregates the entire contact period. <span class="mono">results/graph_edges.csv</span>
+stores every pair once with source&nbsp;&lt;&nbsp;target. Department labels are used only for figures and
+for the final descriptive analysis.</p>
+
+<div class="two-6040">
+<div>
+<table>
+  <tr><th>Property</th><th class="r">Value</th><th>Property</th><th class="r">Value</th></tr>
+  <tr><td>Participants</td><td class="r">92</td><td>Mean degree</td><td class="r">16.41</td></tr>
+  <tr><td>Edges</td><td class="r">755</td><td>Median / min / max degree</td><td class="r">15.5 / 4 / 44</td></tr>
+  <tr><td>Density</td><td class="r">0.1804</td><td>Mean local clustering</td><td class="r">0.426</td></tr>
+  <tr><td>Connected components</td><td class="r">1</td><td>Transitivity</td><td class="r">0.368</td></tr>
+  <tr><td>Isolated participants</td><td class="r">0</td><td>Diameter / avg. path</td><td class="r">3 / 1.96</td></tr>
+</table>
+<div class="tcap">Table 1. Global properties of the fixed aggregated graph (<span class="mono">results/network_stats.json</span>).</div>
+
+<table>
+  <tr><th>Rank</th><th>Node</th><th>Orig. ID</th><th>Dept.</th><th class="r">Degree</th><th class="r">Deg. centr.</th><th class="r">Clustering</th></tr>
+  <tr><td>1</td><td>84</td><td>804</td><td>DMCT</td><td class="r">44</td><td class="r">0.484</td><td class="r">0.256</td></tr>
+  <tr><td>2</td><td>58</td><td>311</td><td>DSE</td><td class="r">38</td><td class="r">0.418</td><td class="r">0.283</td></tr>
+  <tr><td>3</td><td>14</td><td>95</td><td>DSE</td><td class="r">32</td><td class="r">0.352</td><td class="r">0.343</td></tr>
+  <tr><td>4</td><td>12</td><td>80</td><td>DMCT</td><td class="r">31</td><td class="r">0.341</td><td class="r">0.305</td></tr>
+  <tr><td>5</td><td>27</td><td>134</td><td>DMCT</td><td class="r">30</td><td class="r">0.330</td><td class="r">0.290</td></tr>
+  <tr><td>6</td><td>9</td><td>63</td><td>SRH</td><td class="r">28</td><td class="r">0.308</td><td class="r">0.251</td></tr>
+  <tr><td>7</td><td>45</td><td>223</td><td>DSE</td><td class="r">28</td><td class="r">0.308</td><td class="r">0.336</td></tr>
+  <tr><td>8</td><td>24</td><td>123</td><td>DSE</td><td class="r">26</td><td class="r">0.286</td><td class="r">0.271</td></tr>
+  <tr><td>9</td><td>72</td><td>662</td><td>DSE</td><td class="r">26</td><td class="r">0.286</td><td class="r">0.403</td></tr>
+  <tr><td>10</td><td>86</td><td>826</td><td>DISQ</td><td class="r">26</td><td class="r">0.286</td><td class="r">0.323</td></tr>
+</table>
+<div class="tcap">Table 2. Top-10 participants by degree centrality, degree/(N&minus;1). Ties are broken by the smaller ID.</div>
+</div>
+<figure>
+  <img src="../results/figures/network_departments.png" style="width:100%">
+  <figcaption><b>Figure 1.</b> Spring layout of the contact network. Colour shows department, size shows degree, and the top-10 hubs are labelled. Departments form visible clusters, and the hubs (84, 27, 12 in DMCT; 58, 14, 45, 72, 24 in DSE) sit together in the dense core.</figcaption>
+</figure>
+</div>
+<p>The network is small, dense and very compact: every participant is within three hops of every
+other. Local clustering is high (0.43 on average; 0.17&ndash;0.78) and tends to fall as degree rises, so the
+hubs bridge groups while low-degree members sit inside tight departmental cliques. These hubs are also
+heavily connected to one another, which is the overlapping-audience problem the assignment describes.</p>
+
+<h2><span class="num">2</span>Independent Cascade Simulator</h2>
+<p>I implemented the Independent Cascade Model myself (<span class="mono">environment.py</span>,
+<span class="mono">IndependentCascadeSimulator</span>) using the required live-arc construction. Every
+undirected edge becomes two directed arcs, giving 1,510 arcs sorted by (source,&nbsp;target).
+For an episode, <span class="mono">numpy.random.default_rng(diffusion_seed)</span> draws exactly one
+uniform number per arc in that order. An arc is <i>live</i> if its draw is &lt;&nbsp;0.10. A breadth-first
+search from the distinct seeds then counts every participant reachable through live arcs, seeds
+included. This is equivalent to the "one chance per newly active neighbour" process: each activation
+attempt is an independent coin flip used at most once, so flipping all coins in advance gives the same
+distribution of active sets. The same ordered arc list is used for every simulation. Live arcs and draws
+stay inside the simulator. Policies never see them, and the environment never evaluates hypothetical
+actions.</p>
+<table>
+  <tr><th>Verification check (checks.json)</th><th>Result</th><th>Verification check (checks.json)</th><th>Result</th></tr>
+  <tr><td>Empty seed set &rarr; zero spread</td><td class="pass">pass</td><td>Duplicate action raises an error</td><td class="pass">pass</td></tr>
+  <tr><td>p = 0 &rarr; only distinct seeds active (incl. repeated seeds)</td><td class="pass">pass</td><td>Exactly five distinct users per episode (also all 800 eval episodes)</td><td class="pass">pass</td></tr>
+  <tr><td>p = 1 &rarr; all users reachable from seeds active</td><td class="pass">pass</td><td>Reward = spread / N (unit test and all 800 eval rows)</td><td class="pass">pass</td></tr>
+  <tr><td>Same graph, seeds and diffusion seed &rarr; same spread</td><td class="pass">pass</td><td>Masked actions have probability exactly 0 (both policies)</td><td class="pass">pass</td></tr>
+  <tr><td>Two arcs per undirected edge (1,510 arcs)</td><td class="pass">pass</td><td>Finite losses and gradient norms in all 300 updates</td><td class="pass">pass</td></tr>
+</table>
+<div class="tcap">Table 3. Selected checks. Also passing: out-of-range action rejected, step after termination rejected, N&times;5 observation and mask, 50 updates per run, 800 evaluation episodes (17 checks in total).</div>
+
+<h2><span class="num">3</span>Reinforcement-Learning Formulation</h2>
+<p><b>State and observation.</b> <span class="mono">reset(diffusion_seed)</span> fixes the hidden
+realization for the episode and returns an N&times;5 matrix in ascending node-ID order together with a
+Boolean mask (True&nbsp;=&nbsp;unselected). The five features are exactly: degree centrality
+degree/(N&minus;1); local clustering coefficient; selected indicator; selected-neighbour fraction
+(selected neighbours / degree, 0 for an isolated node); and remaining budget / 5. The first two are
+computed once. The last three are recomputed after every action. No department labels, IDs, embeddings,
+live arcs or future spread are exposed.</p>
+<p><b>Actions and transitions.</b> An action is an integer 0&ndash;91 naming an unselected participant.
+<span class="mono">step(action)</span> raises <span class="mono">ValueError</span> for a non-integer,
+out-of-range or already-selected action instead of silently replacing it. Otherwise it updates the
+selected set, the features and the mask. <b>Reward and termination.</b> Rewards for actions 1&ndash;4 are 0.
+After action 5 the cascade runs once and the episode terminates with
+<i>R</i>&nbsp;=&nbsp;final&nbsp;spread&nbsp;/&nbsp;92&nbsp;&isin;&nbsp;[0,&nbsp;1]. There is no shaping, penalty or
+intermediate feedback.</p>
+<div class="callout gold">
+  <div class="callout-title">Why this is sequential decision-making</div>
+  Each selection removes an option from the action space and changes the selected-indicator,
+  selected-neighbour-fraction and remaining-budget features of the remaining participants. The next
+  choice is therefore conditioned on what has already been chosen. Because the reward depends on the
+  union of what the five seeds reach, the value of a candidate depends on whether its audience is
+  already covered. The objective is a good <i>combination</i>, not five independent popularity scores.
+  Training and evaluation use the same graph; only the diffusion realizations differ.
+</div>
+
+<h2><span class="num">4</span>REINFORCE Implementation</h2>
+<p><span class="mono">reinforce.py</span> implements REINFORCE (Williams, 1992) in plain PyTorch. During
+training, actions are sampled from the masked categorical policy, and each step's differentiable
+log-probability is kept until the update. After 20 complete episodes the loss below is minimized with
+one Adam step (lr&nbsp;=&nbsp;0.001), after clipping the global gradient norm at 1.0. With
+&gamma;&nbsp;=&nbsp;1 and only a terminal reward, every step of episode <i>i</i> uses the same return
+<i>R<sub>i</sub></i>:</p>
+<div class="eq"><i>L</i>(&theta;) = &minus;&thinsp;(1/20) &sum;<sub><i>i</i>=1</sub><sup>20</sup> (<i>R<sub>i</sub></i> &minus; <i>b</i>) &sum;<sub><i>t</i>=1</sub><sup>5</sup> log &pi;<sub>&theta;</sub>(<i>a<sub>i,t</sub></i> | <i>s<sub>i,t</sub></i>),&nbsp;&nbsp;&nbsp;&nbsp; <i>b</i> &larr; 0.9<i>b</i> + 0.1<i>R&#772;</i> &nbsp;(after the step)</div>
+<p>Returns and <i>b</i> are plain Python floats, so they carry no gradient. <i>b</i> starts at 0 in every
+run, stays fixed while a batch is collected and its loss computed, and is updated only after the
+optimizer step. Trajectories are then discarded. Each run therefore makes exactly 50 updates. No critic,
+entropy bonus, normalization, schedule, replay or early stopping is used. At the start of run
+<i>s</i>&nbsp;&isin;&nbsp;{7,&nbsp;21,&nbsp;42}, the Python, NumPy and PyTorch seeds are set to <i>s</i>, and
+episode <i>e</i> uses diffusion_seed&nbsp;=&nbsp;1,000,000&nbsp;+&nbsp;10,000<i>s</i>&nbsp;+&nbsp;<i>e</i>.</p>
+<p><b>How the update changes behaviour.</b> The gradient of &minus;(<i>R</i>&minus;<i>b</i>)&thinsp;log&thinsp;&pi;
+pushes up the probability of every action in an episode that beat the baseline, and pushes down every
+action in an episode that fell short, in proportion to the gap. Over many batches, participants that
+often appear in high-spread combinations gain logit mass under similar feature contexts.
+<b>Why the baseline helps.</b> All rewards are positive (about 0.65). Without <i>b</i>, every sampled
+action would be reinforced and only the size of the push would carry information. Subtracting a running
+estimate of the typical reward centres the weights, so the update keeps the same expected value
+(<i>b</i> does not depend on the actions) but has much smaller variance.</p>
+
+<h2><span class="num">5</span>Policy Architectures</h2>
+<p style="text-align:left">Both policies (<span class="mono">models.py</span>) output one logit per participant. Selected
+participants are set to &minus;&infin; only at the final stage (<span class="mono">masked_logits</span>), so
+the softmax gives them probability exactly 0. Both are trained with identical environment, features,
+REINFORCE code and settings. <b>MLP (4,609 parameters):</b> the same network,
+5&nbsp;&rarr;&nbsp;Linear(5,64)&nbsp;&rarr;&nbsp;ReLU&nbsp;&rarr;&nbsp;Linear(64,64)&nbsp;&rarr;&nbsp;ReLU&nbsp;&rarr;&nbsp;Linear(64,1),
+is applied independently to each participant's five features. Any interaction between participants
+must come through the hand-crafted selection features. <b>Transformer (33,921 parameters):</b>
+N&times;5&nbsp;&rarr;&nbsp;Linear(5,64)&nbsp;&rarr;&nbsp;one <span class="mono">nn.TransformerEncoderLayer</span>
+(d_model&nbsp;64, 4&nbsp;heads, feed-forward&nbsp;128, ReLU, dropout&nbsp;0, post-LayerNorm, default biases)
+&rarr;&nbsp;Linear(64,1) per token. It uses no positional or ID embeddings, no causal mask, no
+graph-restricted attention and no extra final norm.</p>
+<ul class="small">
+  <li><b>Tokens.</b> Each participant is one token whose 64-dimensional embedding is a linear projection of its five features. With no positional embedding the model is permutation-equivariant: a participant is identified only by its features.</li>
+  <li><b>Queries, keys, values.</b> Each token is projected into a query <i>q</i>, a key <i>k</i> and a value <i>v</i>. The weight token <i>j</i> receives from token <i>i</i> is softmax<sub><i>j</i></sub>(<i>q<sub>i</sub></i>&middot;<i>k<sub>j</sub></i>/&radic;16). Token <i>i</i>'s output is the weighted average of the values: a context-dependent summary of the other participants.</li>
+  <li><b>Multi-head attention.</b> Four heads of size 16 learn separate attention patterns in parallel (for example "attend to selected users" or "attend to hubs"). Their outputs are concatenated and projected back to 64 dimensions.</li>
+  <li><b>Residual connections and normalization.</b> Post-norm computes <i>x</i>&nbsp;&larr;&nbsp;LN(<i>x</i>&nbsp;+&nbsp;Attn(<i>x</i>)), then <i>x</i>&nbsp;&larr;&nbsp;LN(<i>x</i>&nbsp;+&nbsp;FF(<i>x</i>)). The residual path keeps each token's own features available, and LayerNorm keeps activations on a stable scale for optimization.</li>
+  <li><b>Attention vs graph connectivity.</b> Attention is a learned, fully connected interaction among all 92 tokens and does not follow the contact edges. The graph enters only through the features (degree, clustering, selected-neighbour fraction). Two strangers can attend to each other, and two neighbours may ignore each other.</li>
+  <li><b>Using selected-user information.</b> Selected tokens stay visible to attention and carry selected&nbsp;=&nbsp;1. After each pick, every other token's representation can change according to what has been chosen, even for participants with no link to the selected ones. This gives the Transformer a channel the MLP lacks for learning "complement the current seeds". REINFORCE is the learning algorithm; the Transformer is only the policy architecture.</li>
+</ul>
+
+<h2><span class="num">6</span>Controlled Evaluation and Results</h2>
+<p>All six final checkpoints (after episode 1,000) and the two baselines were evaluated on diffusion
+seeds 900000&ndash;900099: exactly 800 episodes with identical realizations for every method. Degree picks
+the five highest-degree users (ties to the smaller ID). Random uses a separate generator seeded with
+diffusion_seed&nbsp;+&nbsp;10,000,000 and samples without replacement. Neural policies choose the
+highest-probability valid action (exact ties to the smaller ID) with gradients disabled and no updates.
+Nothing was tuned on evaluation results.</p>
+
+<table>
+  <tr><th>Method</th><th class="r">Train seed</th><th class="r">Spread mean</th><th class="r">Spread std (pop.)</th><th class="r">Reward mean</th><th class="r">Selection time / episode</th><th class="r">Training time</th></tr>
+  <tr class="best"><td>Random</td><td class="r">&minus;1</td><td class="r">60.24</td><td class="r">9.72</td><td class="r">0.6548</td><td class="r">0.07 ms</td><td class="r">0</td></tr>
+  <tr><td>Degree</td><td class="r">&minus;1</td><td class="r">59.67</td><td class="r">7.26</td><td class="r">0.6486</td><td class="r">0.06 ms</td><td class="r">0</td></tr>
+  <tr><td>REINFORCE MLP</td><td class="r">7</td><td class="r">58.88</td><td class="r">13.72</td><td class="r">0.6400</td><td class="r">0.49 ms</td><td class="r">2.32 s</td></tr>
+  <tr><td>REINFORCE MLP</td><td class="r">21</td><td class="r">58.09</td><td class="r">16.11</td><td class="r">0.6314</td><td class="r">0.71 ms</td><td class="r">1.94 s</td></tr>
+  <tr><td>REINFORCE MLP</td><td class="r">42</td><td class="r">55.62</td><td class="r">18.37</td><td class="r">0.6046</td><td class="r">0.56 ms</td><td class="r">1.92 s</td></tr>
+  <tr><td>REINFORCE Transformer</td><td class="r">7</td><td class="r">58.09</td><td class="r">16.11</td><td class="r">0.6314</td><td class="r">1.62 ms</td><td class="r">7.87 s</td></tr>
+  <tr><td>REINFORCE Transformer</td><td class="r">21</td><td class="r">59.67</td><td class="r">7.26</td><td class="r">0.6486</td><td class="r">1.63 ms</td><td class="r">9.66 s</td></tr>
+  <tr><td>REINFORCE Transformer</td><td class="r">42</td><td class="r">58.81</td><td class="r">14.74</td><td class="r">0.6392</td><td class="r">1.61 ms</td><td class="r">7.83 s</td></tr>
+</table>
+<div class="tcap">Table 4. <span class="mono">results/summary.csv</span>. Selection time excludes diffusion. Training time includes all 1,000 training simulations (CPU, 1 thread). Architecture level (mean &plusmn; population std of the three run means): <b>MLP 57.53 &plusmn; 1.39</b>, <b>Transformer 58.86 &plusmn; 0.65</b>; mean training time 2.06 s vs 8.45 s.</div>
+
+<div>
+<figure>
+  <img src="../results/figures/learning_curves.png" style="width:88%">
+  <figcaption><b>Figure 2.</b> Mean training spread over non-overlapping blocks of 20 episodes (50 blocks per run). Curves stay near 62 with no clear trend. Dashed lines are evaluation means on different realizations, shown only for scale.</figcaption>
+</figure>
+<figure>
+  <img src="../results/figures/final_spread_comparison.png" style="width:88%">
+  <figcaption><b>Figure 3.</b> Final spread over the same 100 evaluation realizations. Learned seed sets have higher medians (62&ndash;64) but a heavy lower tail: in 4&ndash;11 of 100 realizations the cascade dies (&lt;&nbsp;20 users), which never happens for Degree or Random.</figcaption>
+</figure>
+</div>
+
+<div class="two-6040">
+<div>
+<table>
+  <tr><th>Method (seed)</th><th>Selected users (in order)</th><th>Departments</th><th class="r">Cov.</th><th class="r">&Sigma;deg / reach</th></tr>
+  <tr><td>Degree</td><td>84, 58, 14, 12, 27</td><td>DMCT DSE DSE DMCT DMCT</td><td class="r">2</td><td class="r">175 / 75</td></tr>
+  <tr><td>MLP (7)</td><td>66, 0, 36, 82, 85</td><td>SRH DSE DISQ DSE DSE</td><td class="r">3</td><td class="r">47 / 44</td></tr>
+  <tr><td>MLP (21)</td><td>0, 36, 66, 82, 10</td><td>DSE DISQ SRH DSE DMCT</td><td class="r">4</td><td class="r">40 / 43</td></tr>
+  <tr><td>MLP (42)</td><td>13, 71, 26, 89, 17</td><td>SFLE DSE DSE DMCT DMCT</td><td class="r">3</td><td class="r">44 / 36</td></tr>
+  <tr><td>Transformer (7)</td><td>66, 0, 36, 82, 10</td><td>SRH DSE DISQ DSE DMCT</td><td class="r">4</td><td class="r">40 / 43</td></tr>
+  <tr><td>Transformer (21)</td><td>84, 58, 14, 12, 27</td><td>DMCT DSE DSE DMCT DMCT</td><td class="r">2</td><td class="r">175 / 75</td></tr>
+  <tr><td>Transformer (42)</td><td>0, 36, 66, 82, 64</td><td>DSE DISQ SRH DSE DSE</td><td class="r">3</td><td class="r">41 / 38</td></tr>
+  <tr><td>Random (100 eps.)</td><td colspan="2">different set each episode</td><td class="r">3.09</td><td class="r">&ndash;</td></tr>
+</table>
+<div class="tcap">Table 5. Selected users and department coverage (distinct departments among seeds; descriptive only). Greedy policies pick the same set for all 100 realizations. &Sigma;deg / reach = sum of seed degrees / size of the union of the seeds' closed neighbourhoods. The Degree seeds share 8 edges among themselves; the learned sets share 0&ndash;1.</div>
+<p class="small"><b>Policy diagnostics</b> (<span class="mono">results/policy_diagnostics.csv</span>). On the
+empty selection, the final first-step entropy is 4.518&ndash;4.522 against 4.522 for a uniform distribution.
+The largest probability is at most 0.014, against 0.0109 uniform. In 5 of 6 runs, the top-ranked first
+pick is the same as at initialization. Transformer seed 21 started and ended strongly correlated with
+degree (r&nbsp;=&nbsp;0.92&nbsp;&rarr;&nbsp;0.99), so its greedy set equals Degree's. The other runs ended with weak or negative correlation to degree, so
+their greedy sets favour low-degree peripheral participants.</p>
+</div>
+<figure>
+  <img src="../results/figures/transformer_seed7_selection.png" style="width:100%">
+  <figcaption><b>Figure 4.</b> REINFORCE Transformer selection from training seed 7 (stars, numbered in selection order) with the seeds' direct neighbours highlighted. Gold rings mark the Degree seeds the policy did not choose. The learned set is spread across four departments on the periphery, while the Degree seeds cluster in the dense core.</figcaption>
+</figure>
+</div>
+
+<h3>Discussion</h3>
+<p><b>Overlapping audiences.</b> The Degree seeds have a combined degree of 175 but reach only 75 distinct
+participants in one hop, and they share 8 edges, so much of their audience is shared. The learned sets
+cover only 36&ndash;44 users in one hop but overlap almost nowhere. In this graph, however, the overlap
+problem matters less than expected. The expected number of live out-arcs per node is about
+0.10&nbsp;&times;&nbsp;16.4&nbsp;&asymp;&nbsp;1.6&nbsp;&gt;&nbsp;1, so most realizations contain one giant live
+component of roughly 60&ndash;70 participants. Spread is then mainly "giant component or not": if any seed
+lands in it, the result is about 62 whatever the seed set. Hubs are almost certain to land in it, which
+explains Degree's narrow distribution (std 7.3, minimum 33). Low-degree seeds can occasionally all miss
+it, which explains the learned sets' collapses (minimum 5) and their higher medians when they succeed,
+because they also start cascades in separate departments. Random sets mix both effects and achieve the
+highest mean here. The differences between methods (about 1&ndash;2 users, ~2% of N) are small relative
+to the realization noise (std 7&ndash;18).</p>
+<p><b>Learning stability.</b> The curves are flat and the policies barely moved from initialization. With
+rewards concentrated around 0.65, the advantages <i>R</i>&minus;<i>b</i> are small and dominated by
+realization noise. The largest pre-clip gradient norm per run was only 0.05&ndash;0.60, so the 1.0 clip never activated. Fifty Adam steps at
+lr&nbsp;=&nbsp;10<sup>&minus;3</sup> are therefore too few to separate good from bad combinations. The run-to-run
+spread confirms that seed choice decides the outcome. The Transformer shows somewhat lower run-to-run
+variability (std 0.65 vs 1.39) and moved further from uniform than the MLP (maximum probability 0.012&ndash;0.014
+vs 0.011), consistent with attention giving it a richer function class. I do not claim a significant
+difference from three seeds. <b>Department coverage.</b> The learned sets cover 3&ndash;4 departments, Degree
+covers 2 (DMCT and DSE only) and Random 3.09 on average. This is descriptive and was never used for
+training. <b>Computational cost.</b> Training a run takes about 2 s (MLP) and about 8.5 s (Transformer)
+on one CPU thread. Greedy selection costs 0.5&ndash;0.7 ms (MLP) and about 1.6 ms (Transformer) per episode,
+against about 0.06 ms for the heuristics. The Transformer's attention is O(N<sup>2</sup>) per step, which
+is negligible at N&nbsp;=&nbsp;92. The entire pipeline runs in about 35 s.</p>
+
+<h2><span class="num">7</span>Limitations</h2>
+<ul class="small">
+  <li>All claims apply only to this fixed, aggregated 92-node contact graph. Static aggregation discards contact timing, duration and repetition, so a single brief contact counts the same as daily collaboration.</li>
+  <li>Adoption is simulated with Independent Cascade at an assumed p&nbsp;=&nbsp;0.10. Spread is a model output, not observed message adoption or information-sharing behaviour.</li>
+  <li>The protocol fixes 1,000 episodes (50 updates), three seeds and no hyperparameter search. The policies are under-trained, and the results should not be read as the ceiling of RL for this task. With three seeds and 100 realizations, differences of 1&ndash;2 users are within noise.</li>
+  <li>Training and evaluation share the same graph; only realizations differ. Generalization to other networks is not tested. Department labels were used only for figures and descriptive coverage.</li>
+  <li>Reported times are wall-clock times on a 2-vCPU Intel Xeon 2.30 GHz cloud machine (CPU, one PyTorch thread) and vary by about &plusmn;20% between runs. Spreads, selections and CSV values are bit-for-bit reproducible.</li>
+</ul>
+
+<h2><span class="num"></span>References</h2>
+<div class="refs">
+  <p>Génois, M., Vestergaard, C. L., Fournet, J., Panisson, A., Bonmarin, I., &amp; Barrat, A. (2015). Data on face-to-face contacts in an office building suggest a low-cost vaccination strategy based on community linkers. <i>Network Science</i>, 3(3), 326&ndash;347. https://doi.org/10.1017/nws.2015.10</p>
+  <p>SocioPatterns. <i>Contacts in a workplace</i> (2013 release, CC Public Domain Dedication). https://sociopatterns.org/datasets/contacts-in-a-workplace/</p>
+  <p>Williams, R. J. (1992). Simple statistical gradient-following algorithms for connectionist reinforcement learning. <i>Machine Learning</i>, 8, 229&ndash;256. https://doi.org/10.1007/BF00992696</p>
+  <p>Kempe, D., Kleinberg, J., &amp; Tardos, É. (2003). Maximizing the spread of influence through a social network. <i>Proc. KDD</i>, 137&ndash;146.</p>
+  <p>Vaswani, A., et al. (2017). Attention is all you need. <i>Advances in Neural Information Processing Systems</i>, 30.</p>
+  <p>Zafarani, R., Abbasi, M. A., &amp; Liu, H. (2014). <i>Social Media Mining: An Introduction</i>, Ch. 7 (Information Diffusion). Cambridge University Press.</p>
+  <p>Software: PyTorch 2.15 (<span class="mono">nn.TransformerEncoderLayer</span>), NumPy 2.5, NetworkX 3.7, pandas 3.0, Matplotlib 3.11. No code was adapted from external RL libraries or pre-trained models.</p>
+</div>
+</body>
+</html>
