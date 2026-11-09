@@ -1,0 +1,6 @@
+# Python 3.13.18 (tested). Versions used to produce the submitted results.
+numpy==2.5.3
+pandas==3.0.5
+networkx==3.7
+matplotlib==3.11.2
+torch==2.15.0
