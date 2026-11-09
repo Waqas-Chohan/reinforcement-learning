@@ -1,0 +1,16 @@
+{
+  "participants": 92,
+  "edges": 755,
+  "density": 0.18036311514572384,
+  "connected_components": 1,
+  "largest_component_size": 92,
+  "isolated_participants": 0,
+  "degree_min": 4,
+  "degree_max": 44,
+  "degree_mean": 16.41304347826087,
+  "degree_median": 15.5,
+  "average_clustering": 0.42603175376993024,
+  "transitivity": 0.36824774048903525,
+  "diameter_largest_component": 3,
+  "average_shortest_path_largest_component": 1.964405160057334
+}

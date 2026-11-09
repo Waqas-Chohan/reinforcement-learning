@@ -1,0 +1,3 @@
+method,runs,mean_of_run_spread_means,population_std_of_run_spread_means,mean_training_seconds
+reinforce_mlp,3,57.53,1.3885484027093449,2.058761542666692
+reinforce_transformer,3,58.85666666666666,0.6458758050550854,8.453789232333293

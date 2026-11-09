@@ -1,0 +1,12 @@
+{
+  "python": "3.13.18",
+  "platform": "Linux-6.18.44-fc-v310-x86_64-with-glibc2.39",
+  "processor": "x86_64",
+  "torch": "2.15.0+cu132",
+  "numpy": "2.5.3",
+  "pandas": "3.0.5",
+  "networkx": "3.7",
+  "device": "cpu",
+  "torch_threads": 1,
+  "total_wall_seconds": 34.24976687800006
+}

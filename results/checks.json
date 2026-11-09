@@ -1,0 +1,66 @@
+{
+  "all_passed": true,
+  "checks": {
+    "diffusion_empty_seed_set_zero_spread": "pass",
+    "diffusion_probability_0_only_distinct_seeds": "pass",
+    "diffusion_probability_1_all_reachable_active": "pass",
+    "diffusion_same_inputs_same_spread": "pass",
+    "diffusion_two_arcs_per_undirected_edge": "pass",
+    "env_observation_shape_and_mask": "pass",
+    "env_duplicate_action_rejected": "pass",
+    "env_out_of_range_action_rejected": "pass",
+    "env_step_after_termination_rejected": "pass",
+    "env_five_distinct_selected_users": "pass",
+    "env_reward_equals_spread_over_N": "pass",
+    "policy_zero_probability_for_masked_actions": "pass",
+    "training_losses_and_gradients_finite": "pass",
+    "training_50_updates_per_run": "pass",
+    "eval_800_episodes": "pass",
+    "eval_five_distinct_users_every_episode": "pass",
+    "eval_reward_equals_spread_over_N": "pass"
+  },
+  "training_diagnostics": {
+    "reinforce_mlp_seed7": {
+      "num_updates": 50,
+      "all_finite": true,
+      "max_abs_loss": 15.786356925964355,
+      "max_grad_norm_before_clip": 0.10315091907978058,
+      "final_baseline": 0.6731343315046321
+    },
+    "reinforce_mlp_seed21": {
+      "num_updates": 50,
+      "all_finite": true,
+      "max_abs_loss": 15.076583862304688,
+      "max_grad_norm_before_clip": 0.08079979568719864,
+      "final_baseline": 0.6648315008497307
+    },
+    "reinforce_mlp_seed42": {
+      "num_updates": 50,
+      "all_finite": true,
+      "max_abs_loss": 14.5015287399292,
+      "max_grad_norm_before_clip": 0.0508897639811039,
+      "final_baseline": 0.672407986981689
+    },
+    "reinforce_transformer_seed7": {
+      "num_updates": 50,
+      "all_finite": true,
+      "max_abs_loss": 15.931134223937988,
+      "max_grad_norm_before_clip": 0.21696791052818298,
+      "final_baseline": 0.6739546638565127
+    },
+    "reinforce_transformer_seed21": {
+      "num_updates": 50,
+      "all_finite": true,
+      "max_abs_loss": 15.334318161010742,
+      "max_grad_norm_before_clip": 0.5977613925933838,
+      "final_baseline": 0.665723356303441
+    },
+    "reinforce_transformer_seed42": {
+      "num_updates": 50,
+      "all_finite": true,
+      "max_abs_loss": 14.848421096801758,
+      "max_grad_norm_before_clip": 0.3065507411956787,
+      "final_baseline": 0.6807998416214585
+    }
+  }
+}

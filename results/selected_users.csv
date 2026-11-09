@@ -1,0 +1,9 @@
+method,train_seed,selected_nodes,departments,department_coverage,distinct_selections_over_100
+degree,-1,"[84, 58, 14, 12, 27]","[""DMCT"", ""DSE"", ""DSE"", ""DMCT"", ""DMCT""]",2.0,1
+reinforce_mlp,7,"[66, 0, 36, 82, 85]","[""SRH"", ""DSE"", ""DISQ"", ""DSE"", ""DSE""]",3.0,1
+reinforce_mlp,21,"[0, 36, 66, 82, 10]","[""DSE"", ""DISQ"", ""SRH"", ""DSE"", ""DMCT""]",4.0,1
+reinforce_mlp,42,"[13, 71, 26, 89, 17]","[""SFLE"", ""DSE"", ""DSE"", ""DMCT"", ""DMCT""]",3.0,1
+reinforce_transformer,7,"[66, 0, 36, 82, 10]","[""SRH"", ""DSE"", ""DISQ"", ""DSE"", ""DMCT""]",4.0,1
+reinforce_transformer,21,"[84, 58, 14, 12, 27]","[""DMCT"", ""DSE"", ""DSE"", ""DMCT"", ""DMCT""]",2.0,1
+reinforce_transformer,42,"[0, 36, 66, 82, 64]","[""DSE"", ""DISQ"", ""SRH"", ""DSE"", ""DSE""]",3.0,1
+random,-1,varies per episode,varies,3.09,100

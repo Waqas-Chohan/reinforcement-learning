@@ -1,0 +1,8 @@
+method,train_seed,sum_of_degrees,closed_neighbourhood_union,edges_among_seeds
+degree,-1,175,75,8
+reinforce_mlp,7,47,44,0
+reinforce_mlp,21,40,43,0
+reinforce_mlp,42,44,36,1
+reinforce_transformer,7,40,43,0
+reinforce_transformer,21,175,75,8
+reinforce_transformer,42,41,38,1
